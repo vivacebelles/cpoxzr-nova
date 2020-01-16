@@ -1,0 +1,449 @@
+Thu Jan 16 11:51:49 CST 2020
+pwd = /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44
+
+* Begin Debugging Info
+** Submission file
+	#!/bin/bash
+	#SBATCH --job-name=opt_44
+	#SBATCH --output=opt_44.stdout
+	#SBATCH --error=opt_44.stderr
+	#SBATCH --nodes=3
+	#SBATCH --ntasks-per-node=16
+	#SBATCH --time=50:00:00
+	source /work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/environment
+	TMPDIR=${TMPDIR:-/home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44}
+	cat << EOF_print_debug_info
+	$(printf "%s\n" "$(date)")
+	$(printf "pwd = %s\n" "$PWD")
+	
+	* Begin Debugging Info
+	** Submission file
+	$(cat /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.sub | sed s/\^/\\t/)
+	
+	** Working Directory
+	TMPDIR=$TMPDIR: $([ -d $TMPDIR ] && printf "exists\n" || printf "does not exist\n")
+	
+	** Node List
+	$(cat ${PBS_NODEFILE:-$SLURM_JOB_NODELIST})
+	
+	** PATH
+	$(printf "%s\n" "$PATH" | sed s/:/\\n/g)
+	
+	** LD_LIBRARY_PATH
+	$(printf "%s\n" "$LD_LIBRARY_PATH" | sed s/:/\\n/g)
+	
+	** env
+	$(env)
+	
+	** jobfile
+	$(cat /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.nw | sed s/\^/\\t/)
+	
+	* Begin run output
+	EOF_print_debug_info
+	# Print node information and copy files for job
+	cat >> /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.nodes << EOF_jobinfo
+	===$(date +"%Y-%m-%d-%r") run nodes===
+	$(uniq ${PBS_NODEFILE:-$SLURM_JOB_NODELIST})
+	Working directory $TMPDIR
+	EOF_jobinfo
+	
+	ulimit -s unlimited
+	ulimit -c unlimited
+	ulimit -l unlimited
+	cd $TMPDIR
+	cp -v /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/{opt_44.nw,*.hess,*.movecs,*.db,*.xyz} $TMPDIR 2>/dev/null
+	printf "Starting %s at %s.\n" "$(which nwchem)" "$(date)"
+	export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+	export ARMCI_DEFAULT_SHMMAX=32768
+	srun -N 3 -n 48 nwchem opt_44.nw |& tee /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.out
+	printf "%s: nwchem finished with status $?\n" "$(date)"
+	cp $TMPDIR/{*db,*hess,*movecs,ecce*,*log,*out} /home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44
+
+** Working Directory
+TMPDIR=/scratch/alolinco/804016: exists
+
+** Node List
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo052
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo084
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+condo085
+
+** PATH
+/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/bin
+/shared/hpc/intel/18.3/advisor_2018.3.0.558307/bin64
+/shared/hpc/intel/18.3/vtune_amplifier_2018.3.0.558279/bin64
+/shared/hpc/intel/18.3/inspector_2018.3.0.558189/bin64
+/shared/hpc/intel/18.3/itac/2018.3.022/intel64/bin
+/shared/hpc/intel/18.3/clck/2018.3/bin/intel64
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/bin/intel64
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/intel64/bin
+/usr/lib64/qt-3.3/bin
+/usr/local/bin
+/usr/bin
+/usr/local/sbin
+/usr/sbin
+/shared/hpc/intel/18.3/parallel_studio_xe_2018.3.051/bin
+/home/alolinco/.local/bin
+/home/alolinco/bin
+
+** LD_LIBRARY_PATH
+/shared/hpc/intel/18.3/itac/2018.3.022/intel64/slib
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/intel64/lib
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/mic/lib
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/ipp/lib/intel64
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/lib/intel64/gcc4.7
+/shared/hpc/intel/18.3/debugger_2018/iga/lib
+/shared/hpc/intel/18.3/debugger_2018/libipt/intel64/lib
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/daal/lib/intel64_lin
+/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/lib/intel64_lin/gcc4.4
+
+** env
+SLURM_CHECKPOINT_IMAGE_DIR=/var/slurm/checkpoint
+SLURM_NODELIST=condo[052,084-085]
+MKLROOT=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl
+CPLUS_INCLUDE_PATH=/shared/hpc/intel/18.3/clck/2018.3/include
+SLURM_JOB_NAME=opt_44
+MANPATH=/shared/hpc/intel/18.3/itac/2018.3.022/man:/shared/hpc/intel/18.3/man/common:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/man:/shared/hpc/intel/18.3/documentation_2018/en/debugger/gdb-ia/man:/shared/hpc/intel/18.3/documentation_2018/en/debugger/gdb-igfx/man:/usr/share/lmod/lmod/share/man::
+XDG_SESSION_ID=34165
+SLURMD_NODENAME=condo052
+SLURM_TOPOLOGY_ADDR=condo052
+SLURM_NTASKS_PER_NODE=16
+VT_MPI=impi4
+_ModuleTable003_=bG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmUiLH0sWyJzeXN0ZW1CYXNlTVBBVEgiXT0iL2V0Yy9tb2R1bGVmaWxlczovdXNyL3NoYXJlL21vZHVsZWZpbGVzOi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMvTGludXg6L3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9Db3JlOi91c3Ivc2hhcmUvbG1vZC9sbW9kL21vZHVsZWZpbGVzL0NvcmUiLFsidmVyc2lvbiJdPTIsfQ==
+HOSTNAME=condo052
+SLURM_PRIO_PROCESS=0
+SELINUX_ROLE_REQUESTED=
+SLURM_NODE_ALIASES=(null)
+IPPROOT=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/ipp
+INTEL_LICENSE_FILE=/shared/hpc/intel/18.3/licenses
+CLCK_ROOT=/shared/hpc/intel/18.3/clck/2018.3
+ADVISOR_2018_DIR=/shared/hpc/intel/18.3/advisor_2018.3.0.558307
+TERM=xterm-256color
+SHELL=/bin/bash
+SLURM_JOB_QOS=normal
+HISTSIZE=1000
+SLURM_TOPOLOGY_ADDR_PATTERN=node
+GDBSERVER_MIC=/shared/hpc/intel/18.3/debugger_2018/gdb/targets/intel64/x200/bin/gdbserver
+LMOD_DEFAULT_MODULEPATH=/opt/rit/singularity/modules:/opt/rit/spack-modules/lmod/linux-rhel7-x86_64/Core:/shared/hpc/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core
+MODULEPATH_ROOT=/usr/share/modulefiles
+TMPDIR=/scratch/alolinco/804016
+SSH_CLIENT=10.25.147.217 62747 22
+LIBRARY_PATH=/shared/hpc/intel/18.3/clck/2018.3/lib/intel64:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/ipp/lib/intel64:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/lib/intel64/gcc4.7:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/daal/lib/intel64_lin:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/lib/intel64_lin/gcc4.4
+VT_ARCHi=intel64
+SELINUX_USE_CURRENT_RANGE=
+LMOD_PKG=/usr/share/lmod/lmod
+QTDIR=/usr/lib64/qt-3.3
+LMOD_VERSION=7.8.16
+QTINC=/usr/lib64/qt-3.3/include
+SSH_TTY=/dev/pts/0
+SLURM_MEM_PER_CPU=7900
+QT_GRAPHICSSYSTEM_CHECKED=1
+SLURM_NNODES=3
+USER=alolinco
+NWCHEM_TOP=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/
+LD_LIBRARY_PATH=/shared/hpc/intel/18.3/itac/2018.3.022/intel64/slib:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64_lin:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/intel64/lib:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/mic/lib:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/ipp/lib/intel64:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/lib/intel64/gcc4.7:/shared/hpc/intel/18.3/debugger_2018/iga/lib:/shared/hpc/intel/18.3/debugger_2018/libipt/intel64/lib:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/daal/lib/intel64_lin:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/lib/intel64_lin/gcc4.4
+LMOD_sys=Linux
+PSTLROOT=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/pstl
+SLURM_JOBID=804016
+VTUNE_AMPLIFIER_2018_DIR=/shared/hpc/intel/18.3/vtune_amplifier_2018.3.0.558279
+CPATH=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/ipp/include:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl/include:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/pstl/include:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb/include:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/daal/include
+TMOUT=5400
+SLURM_NTASKS=48
+NWCHEM_BASIS_LIBRARY=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/libraries/
+LMOD_PREPEND_BLOCK=normal
+NLSPATH=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/locale/%l_%t/%N:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl/lib/intel64_lin/locale/%l_%t/%N:/shared/hpc/intel/18.3/debugger_2018/gdb/intel64/share/locale/%l_%t/%N
+SINGULARITY_TMPDIR=
+SLURM_TASKS_PER_NODE=16(x3)
+VT_ADD_LIBS=-ldwarf -lelf -lvtunwind -lm -lpthread
+_ModuleTable001_=X01vZHVsZVRhYmxlXz17WyJhY3RpdmVTaXplIl09MSxiYXNlTXBhdGhBPXsiL29wdC9yaXQvc2luZ3VsYXJpdHkvbW9kdWxlcyIsIi9vcHQvcml0L3NwYWNrLW1vZHVsZXMvbG1vZC9saW51eC1yaGVsNy14ODZfNjQvQ29yZSIsIi9zaGFyZWQvaHBjL21vZHVsZWZpbGVzIiwiL2V0Yy9tb2R1bGVmaWxlcyIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzL0xpbnV4IiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9Db3JlIiwiL3Vzci9zaGFyZS9sbW9kL2xtb2QvbW9kdWxlZmlsZXMvQ29yZSIsfSxbImNfcmVidWlsZFRpbWUiXT1mYWxzZSxbImNfc2hvcnRUaW1lIl09ZmFsc2UsZmFtaWx5PXt9LGluYWN0aXZlPXt9LG1UPXtpbnRlbD17WyJG
+MAIL=/var/spool/mail/alolinco
+PATH=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/bin:/shared/hpc/intel/18.3/advisor_2018.3.0.558307/bin64:/shared/hpc/intel/18.3/vtune_amplifier_2018.3.0.558279/bin64:/shared/hpc/intel/18.3/inspector_2018.3.0.558189/bin64:/shared/hpc/intel/18.3/itac/2018.3.022/intel64/bin:/shared/hpc/intel/18.3/clck/2018.3/bin/intel64:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/bin/intel64:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/intel64/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/shared/hpc/intel/18.3/parallel_studio_xe_2018.3.051/bin:/home/alolinco/.local/bin:/home/alolinco/bin
+SLURM_WORKING_CLUSTER=condo2017:172.17.200.100:6817:8448
+NWCHEM_NWPW_LIBRARY=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/libraryps/
+SLURM_JOB_ID=804016
+TBBROOT=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/tbb
+LMOD_SETTARG_CMD=:
+SLURM_JOB_USER=alolinco
+F90=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/bin/intel64/ifort
+PWD=/home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44
+_LMFILES_=/shared/hpc/modulefiles/intel/18.3
+GDB_CROSS=/shared/hpc/intel/18.3/debugger_2018/gdb/intel64/bin/gdb-ia
+LANG=en_US.UTF-8
+MODULEPATH=/opt/rit/singularity/modules:/opt/rit/spack-modules/lmod/linux-rhel7-x86_64/Core:/shared/hpc/modulefiles:/etc/modulefiles:/usr/share/modulefiles:/usr/share/modulefiles/Linux:/usr/share/modulefiles/Core:/usr/share/lmod/lmod/modulefiles/Core
+SLURM_JOB_UID=369342
+VT_LIB_DIR=/shared/hpc/intel/18.3/itac/2018.3.022/intel64/lib
+LOADEDMODULES=intel/18.3
+_ModuleTable_Sz_=3
+SLURM_NODEID=0
+SLURM_SUBMIT_DIR=/work/LAS/twindus-lab/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44
+F77=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/bin/intel64/ifort
+SELINUX_LEVEL_REQUESTED=
+SLURM_TASK_PID=14490
+SLURM_NPROCS=48
+VT_ROOT=/shared/hpc/intel/18.3/itac/2018.3.022
+LMOD_CMD=/usr/share/lmod/lmod/libexec/lmod
+SLURM_CPUS_ON_NODE=16
+DAALROOT=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/daal
+SLURM_PROCID=0
+ENVIRONMENT=BATCH
+MPM_LAUNCHER=/shared/hpc/intel/18.3/debugger_2018/mpm/mic/bin/start_mpm.sh
+HISTCONTROL=ignoredups
+KRB5CCNAME=KEYRING:persistent:369342
+SLURM_JOB_NODELIST=condo[052,084-085]
+INTEL_PYTHONHOME=/shared/hpc/intel/18.3/debugger_2018/python/intel64/
+SPCE=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/solvents/spce.rst
+SHLVL=3
+HOME=/home/alolinco
+SLURM_LOCALID=0
+SLURM_JOB_GID=101
+SLURM_JOB_CPUS_PER_NODE=16(x3)
+SLURM_CLUSTER_NAME=condo2017
+_ModuleTable002_=TiJdPSIvc2hhcmVkL2hwYy9tb2R1bGVmaWxlcy9pbnRlbC8xOC4zIixbImRlZmF1bHQiXT0wLFsiZnVsbE5hbWUiXT0iaW50ZWwvMTguMyIsWyJsb2FkT3JkZXIiXT0xLHByb3BUPXt9LFsic2hvcnQiXT0iaW50ZWwiLFsic3RhdHVzIl09ImFjdGl2ZSIsfSx9LG1wYXRoQT17Ii9vcHQvcml0L3Npbmd1bGFyaXR5L21vZHVsZXMiLCIvb3B0L3JpdC9zcGFjay1tb2R1bGVzL2xtb2QvbGludXgtcmhlbDcteDg2XzY0L0NvcmUiLCIvc2hhcmVkL2hwYy9tb2R1bGVmaWxlcyIsIi9ldGMvbW9kdWxlZmlsZXMiLCIvdXNyL3NoYXJlL21vZHVsZWZpbGVzIiwiL3Vzci9zaGFyZS9tb2R1bGVmaWxlcy9MaW51eCIsIi91c3Ivc2hhcmUvbW9kdWxlZmlsZXMvQ29yZSIsIi91c3Ivc2hhcmUv
+AMBER_1=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/amber_s/
+SLURM_GTIDS=0
+SLURM_SUBMIT_HOST=condo2017.its.iastate.edu
+VT_SLIB_DIR=/shared/hpc/intel/18.3/itac/2018.3.022/intel64/slib
+FC=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/bin/intel64/ifort
+AMBER_2=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/amber_q/
+SLURM_JOB_PARTITION=long_medium
+BASH_ENV=/usr/share/lmod/lmod/init/bash
+AMBER_3=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/amber_x/
+PYTHONPATH=/shared/hpc/intel/18.3/advisor_2018.3.0.558307/pythonapi
+LMOD_arch=x86_64
+LOGNAME=alolinco
+AMBER_4=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/amber_u/
+QTLIB=/usr/lib64/qt-3.3/lib
+SLURM_JOB_ACCOUNT=las
+CLASSPATH=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi/intel64/lib/mpi.jar:/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/daal/lib/daal.jar
+XDG_DATA_DIRS=/home/alolinco/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+SSH_CONNECTION=10.25.147.217 62747 10.89.9.12 22
+SLURM_JOB_NUM_NODES=3
+MODULESHOME=/usr/share/lmod/lmod
+CHARMM_X=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/charmm_x/
+LMOD_SETTARG_FULL_SUPPORT=no
+PKG_CONFIG_PATH=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mkl/bin/pkgconfig
+LESSOPEN=||/usr/bin/lesspipe.sh %s
+PTMPDIR=/mnt/scratch/alolinco/804016
+INFOPATH=/shared/hpc/intel/18.3/documentation_2018/en/debugger/gdb-ia/info:/shared/hpc/intel/18.3/documentation_2018/en/debugger/gdb-igfx/info
+LMOD_FULL_SETTARG_SUPPORT=no
+CC=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/bin/intel64/icc
+XDG_RUNTIME_DIR=/run/user/369342
+INSPECTOR_2018_DIR=/shared/hpc/intel/18.3/inspector_2018.3.0.558189
+CHARMM_S=/work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/data/charmm_s/
+LMOD_DIR=/usr/share/lmod/lmod/libexec
+PBS_NODEFILE=/scratch/alolinco/804016/EszarPTrOY
+LMOD_COLORIZE=yes
+I_MPI_ROOT=/shared/hpc/intel/18.3/compilers_and_libraries_2018.3.222/linux/mpi
+BASH_FUNC_module()=() {  eval $($LMOD_CMD bash "$@") && eval $(${LMOD_SETTARG_CMD:-:} -s sh)
+}
+BASH_FUNC_ml()=() {  eval $($LMOD_DIR/ml_cmd "$@")
+}
+_=/usr/bin/env
+
+** jobfile
+	echo
+	
+	start opt_44
+	
+	memory 2500 mb
+	
+	charge 0
+	
+	geometry units angstroms noautoz 
+	Zr	0.27889743	-1.73348002	0.21419684
+	N	1.34606718	-3.30397046	-0.77504724
+	C	1.64767819	-4.47771876	0.08032549
+	C	1.95013287	-3.55491501	-2.0872759
+	N	-1.20602523	-3.14358937	0.72056142
+	C	-1.51443701	-4.35751575	-0.0611036
+	C	-2.02949809	-3.14470007	1.94362511
+	H	1.71508437	-2.77123811	-2.80274121
+	H	1.58916198	-4.50837513	-2.51387991
+	H	3.05161747	-3.63868958	-2.02691652
+	H	1.15074107	-4.40238924	1.04878162
+	H	2.73419389	-4.5783856	0.25317061
+	H	1.30599427	-5.41224411	-0.39601189
+	H	-1.87489244	-2.23725852	2.52853896
+	H	-1.79315046	-4.01419828	2.58306206
+	H	-3.10442652	-3.20826658	1.70234382
+	H	-0.89992237	-4.39511943	-0.96062629
+	H	-2.57639465	-4.38197063	-0.36071221
+	H	-1.3287817	-5.27006863	0.53129447
+	N	-1.19848652	-0.05684274	-0.15874217
+	C	-2.67593878	-0.14553053	-0.52202936
+	C	-0.8903722	1.30770696	-0.18131575
+	O	-1.8565741	2.02600966	-0.95988715
+	C	-2.82640034	1.06730678	-1.46423161
+	H	-2.58989687	0.8079798	-2.50471829
+	H	-3.81240701	1.53500251	-1.42184596
+	C	0.11846438	2.08375551	0.33030153
+	C	0.12117389	3.53217158	-0.09632879
+	C	0.97253939	3.98542697	-1.12279678
+	C	0.99049373	5.32869625	-1.51648287
+	C	0.15013417	6.25502539	-0.88946738
+	C	-0.71127936	5.8231795	0.12605858
+	C	-0.72521913	4.4798712	0.51412312
+	H	-1.41410007	4.14881643	1.28414861
+	H	0.16161499	7.29807243	-1.19184898
+	H	-1.37737551	6.5311821	0.61124957
+	H	1.6264458	3.27289812	-1.61807159
+	H	1.65728013	5.64932047	-2.31219119
+	C	1.08249232	1.71488887	1.49159644
+	C	1.20385523	0.21992889	1.77849641
+	C	0.56566958	2.39873959	2.80009734
+	C	2.50058235	2.29259016	1.22827965
+	C	2.32477642	-0.62194285	1.47745849
+	C	2.11169687	-1.90045673	2.05989452
+	C	0.29996571	-0.56868804	2.55690092
+	C	0.85479705	-1.86985349	2.7291863
+	H	-0.64609194	-0.22867603	2.95056939
+	H	3.2124459	-0.33694559	0.93397937
+	H	2.7940544	-2.73602982	2.01691624
+	H	0.41729323	-2.67950606	3.29370658
+	C	-3.08658713	-1.42873428	-1.24805592
+	C	-3.5389304	0.06499688	0.74201246
+	H	-2.47435786	-1.59720208	-2.14220305
+	H	-4.13354163	-1.34762676	-1.56722956
+	H	-2.98732282	-2.29551902	-0.59853497
+	H	-4.60745152	0.06947666	0.48909091
+	H	-3.29415477	1.02243644	1.21504183
+	H	-3.35841095	-0.73501257	1.4639848
+	H	1.21948798	2.14857864	3.64412319
+	H	-0.45133546	2.07246847	3.03967539
+	H	3.16169126	2.06306973	2.07188929
+	H	2.45655392	3.3776459	1.10869696
+	H	0.55454111	3.48597251	2.67961446
+	H	2.9498747	1.88078505	0.31769496
+	N	1.16737788	-0.35022926	-1.75915615
+	H	0.86696812	0.54092276	-1.34161216
+	C	2.63444336	-0.26561589	-2.01876661
+	C	0.38000094	-0.53430714	-3.01446146
+	H	-0.66339375	-0.29921714	-2.81074687
+	H	0.44298417	-1.56564133	-3.36487397
+	H	0.75028767	0.12265145	-3.81450156
+	H	3.11273141	0.27013845	-1.19842685
+	H	2.83953261	0.27598171	-2.95338886
+	H	3.07581681	-1.25873019	-2.08482898
+	end
+	
+	basis
+	 Zr library "LANL2DZ ECP"
+	 C library 6-311G
+	 O library 6-311G
+	 H library 6-311G
+	 N library 6-311G
+	end
+	
+	ecp
+	 Zr library "LANL2DZ ECP"
+	end
+	
+	dft
+	  xc b3lyp
+	  rodft
+	  mult 1
+	  iterations 100
+	end
+	
+	set driver:linopt 0
+	driver
+	  maxiter 200
+	  xyz opt_44
+	end
+	
+	task dft optimize
+
+* Begin run output
+‘/home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.nw’ -> ‘/scratch/alolinco/804016/opt_44.nw’
+‘/home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.drv.hess’ -> ‘/scratch/alolinco/804016/opt_44.drv.hess’
+‘/home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.movecs’ -> ‘/scratch/alolinco/804016/opt_44.movecs’
+‘/home/alolinco/cpoxzr/nwchem_runs/min_6311g/opt_44/opt_44.db’ -> ‘/scratch/alolinco/804016/opt_44.db’
+Starting /work/LAS/twindus-lab/nwchem/6.6-mpi-spawn/bin/nwchem at Thu Jan 16 11:51:50 CST 2020.
+export TMOUT=5400
+export TMPDIR=/scratch/alolinco/804016
+export PTMPDIR=/mnt/scratch/alolinco/804016
+ argument  1 = opt_44.nw
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Last System Error Message from Task 16:: Operation now in progress
+Last System Error Message from Task 33:: Resource temporarily unavailable
+Last System Error Message from Task 18:: Operation now in progress
+Last System Error Message from Task 21:: Operation now in progress
+Last System Error Message from Task 23:: Operation now in progress
+Last System Error Message from Task 25:: Operation now in progress
+Last System Error Message from Task 26:: Operation now in progress
+Last System Error Message from Task 27:: Operation now in progress
+Last System Error Message from Task 31:: Operation now in progress
+Last System Error Message from Task 17:: Operation now in progress
+Last System Error Message from Task 24:: Operation now in progress
+Last System Error Message from Task 28:: Operation now in progress
+Last System Error Message from Task 29:: Operation now in progress
+Last System Error Message from Task 20:: Operation now in progress
+Last System Error Message from Task 19:: Operation now in progress
+Last System Error Message from Task 22:: Operation now in progress
+Last System Error Message from Task 30:: Operation now in progress
+slurmstepd: error: *** STEP 804016.0 ON condo052 CANCELLED AT 2020-01-16T12:17:03 ***
+Last System Error Message from Task 1:: Operation now in progress
+Last System Error Message from Task 2:: Operation now in progress
+Last System Error Message from Task 3:: Operation now in progress
+Last System Error Message from Task 4:: Operation now in progress
+Last System Error Message from Task 5:: Operation now in progress
+Last System Error Message from Task 6:: Operation now in progress
+Last System Error Message from Task 7:: Operation now in progress
+Last System Error Message from Task 8:: Operation now in progress
+Last System Error Message from Task 9:: Operation now in progress
+Last System Error Message from Task 10:: Operation now in progress
+Last System Error Message from Task 11:: Operation now in progress
+Last System Error Message from Task 12:: Operation now in progress
+Last System Error Message from Task 13:: Operation now in progress
+Last System Error Message from Task 14:: Operation now in progress
+Last System Error Message from Task 15:: Operation now in progress
+0:Terminate signal was sent, status=: 15
+(rank:0 hostname:condo052 pid:14545):ARMCI DASSERT fail. ../../ga-5-4/armci/src/common/signaltrap.c:SigTermHandler():477 cond:0
+Last System Error Message from Task 0:: No such file or directory

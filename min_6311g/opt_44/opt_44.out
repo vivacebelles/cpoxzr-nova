@@ -1,0 +1,41 @@
+export TMOUT=5400
+export TMPDIR=/scratch/alolinco/804016
+export PTMPDIR=/mnt/scratch/alolinco/804016
+ argument  1 = opt_44.nw
+srun: Job step aborted: Waiting up to 32 seconds for job step to finish.
+Last System Error Message from Task 16:: Operation now in progress
+Last System Error Message from Task 33:: Resource temporarily unavailable
+Last System Error Message from Task 18:: Operation now in progress
+Last System Error Message from Task 21:: Operation now in progress
+Last System Error Message from Task 23:: Operation now in progress
+Last System Error Message from Task 25:: Operation now in progress
+Last System Error Message from Task 26:: Operation now in progress
+Last System Error Message from Task 27:: Operation now in progress
+Last System Error Message from Task 31:: Operation now in progress
+Last System Error Message from Task 17:: Operation now in progress
+Last System Error Message from Task 24:: Operation now in progress
+Last System Error Message from Task 28:: Operation now in progress
+Last System Error Message from Task 29:: Operation now in progress
+Last System Error Message from Task 20:: Operation now in progress
+Last System Error Message from Task 19:: Operation now in progress
+Last System Error Message from Task 22:: Operation now in progress
+Last System Error Message from Task 30:: Operation now in progress
+slurmstepd: error: *** STEP 804016.0 ON condo052 CANCELLED AT 2020-01-16T12:17:03 ***
+Last System Error Message from Task 1:: Operation now in progress
+Last System Error Message from Task 2:: Operation now in progress
+Last System Error Message from Task 3:: Operation now in progress
+Last System Error Message from Task 4:: Operation now in progress
+Last System Error Message from Task 5:: Operation now in progress
+Last System Error Message from Task 6:: Operation now in progress
+Last System Error Message from Task 7:: Operation now in progress
+Last System Error Message from Task 8:: Operation now in progress
+Last System Error Message from Task 9:: Operation now in progress
+Last System Error Message from Task 10:: Operation now in progress
+Last System Error Message from Task 11:: Operation now in progress
+Last System Error Message from Task 12:: Operation now in progress
+Last System Error Message from Task 13:: Operation now in progress
+Last System Error Message from Task 14:: Operation now in progress
+Last System Error Message from Task 15:: Operation now in progress
+0:Terminate signal was sent, status=: 15
+(rank:0 hostname:condo052 pid:14545):ARMCI DASSERT fail. ../../ga-5-4/armci/src/common/signaltrap.c:SigTermHandler():477 cond:0
+Last System Error Message from Task 0:: No such file or directory
